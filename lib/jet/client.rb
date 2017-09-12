@@ -49,7 +49,7 @@ module Jet
     def rest_post_with_token(path, body = {})
       headers = token
       response = RestClient.post("#{API_URL}#{path}", encode_json(body), headers)
-      decode_json(response.body) if response.code == 201
+      decode_json(response.body) if response.code == 200
     end
 
     def orders
@@ -75,6 +75,10 @@ module Jet
     def refunds
       Refunds.new(self)
     end
+
+    def reports
+      Reports.new(self)
+    end
   end
 end
 
@@ -85,3 +89,4 @@ require 'jet/client/taxonomy'
 require 'jet/client/files'
 require 'jet/client/refunds'
 require 'jet/client/returns'
+require 'jet/client/reports'
